@@ -77,58 +77,127 @@ function displayCalculation() {
     `;
 }
 
-// Função para criar animação da corrida
+// Função para criar animação da corrida circular
 function createRaceAnimation(result) {
-  raceAnimationDiv.innerHTML = '<h4 style="color: #ff8888; margin-bottom: 20px;">🏁 Corrida em Andamento:</h4>';
+  raceAnimationDiv.innerHTML =
+    '<h4 style="color: #ff8888; margin-bottom: 20px; text-align: center;">🏁 Corrida em Andamento - Pista Única:</h4>';
 
-  result.forEach((group, index) => {
-    const clanDiv = document.createElement('div');
-    clanDiv.className = 'clan-group';
+  // Criar container da pista única para TODOS os participantes
+  const mainTrackContainer = document.createElement('div');
+  mainTrackContainer.className = 'race-track-circular';
 
-    const clanName = group[0].clã;
-    const clanTitle = document.createElement('div');
-    clanTitle.className = 'clan-title';
-    clanTitle.textContent = `⚡ Clã: ${clanName}`;
-    clanDiv.appendChild(clanTitle);
+  // Criar fundo da pista
+  const trackBackground = document.createElement('div');
+  trackBackground.className = 'track-background';
+  mainTrackContainer.appendChild(trackBackground);
 
-    group.forEach((racer, racerIndex) => {
-      const racerDiv = document.createElement('div');
-      racerDiv.className = 'racer';
-      racerDiv.style.animationDelay = `${(index * group.length + racerIndex) * 0.3}s`;
+  // Criar linhas da pista
+  const trackLines = document.createElement('div');
+  trackLines.className = 'track-lines';
+  for (let i = 0; i < 4; i++) {
+    const line = document.createElement('div');
+    line.className = 'track-line';
+    trackLines.appendChild(line);
+  }
+  mainTrackContainer.appendChild(trackLines);
 
-      const racerInfo = document.createElement('div');
-      racerInfo.className = 'racer-info';
-      racerInfo.textContent = `${racer.nome}`;
+  // Criar linha de chegada
+  const finishLine = document.createElement('div');
+  finishLine.className = 'finish-line-circular';
+  mainTrackContainer.appendChild(finishLine);
 
-      const raceTrack = document.createElement('div');
-      raceTrack.className = 'race-track';
-
-      // Adicionar linha de chegada
-      const finishLine = document.createElement('div');
-      finishLine.className = 'finish-line';
-      raceTrack.appendChild(finishLine);
-
-      const raceProgress = document.createElement('div');
-      raceProgress.className = `race-progress ${colorMap[racer.nome]}`;
-
-      // Calcular largura baseada na velocidade (100 = 100%)
-      const progressWidth = racer.velocidade;
-      raceProgress.style.width = `${progressWidth}%`;
-      raceProgress.style.animationDelay = `${(index * group.length + racerIndex) * 0.3}s`;
-
-      const speedLabel = document.createElement('span');
-      speedLabel.className = 'speed-label';
-      speedLabel.textContent = `${racer.velocidade}`;
-      raceProgress.appendChild(speedLabel);
-
-      raceTrack.appendChild(raceProgress);
-      racerDiv.appendChild(racerInfo);
-      racerDiv.appendChild(raceTrack);
-      clanDiv.appendChild(racerDiv);
+  // Coletar TODOS os participantes de TODOS os clãs
+  const allRacers = [];
+  result.forEach(group => {
+    group.forEach(racer => {
+      allRacers.push(racer);
     });
-
-    raceAnimationDiv.appendChild(clanDiv);
   });
+
+  // Emojis para cada criatura
+  const emojiMap = {
+    'Velha Turbo': '👵',
+    'Ken Lobisomem': '🐺',
+    Spectra: '👻',
+    Zumbizilla: '🧟',
+    Morana: '🧙'
+  };
+
+  // Adicionar TODOS os corredores na MESMA pista
+  allRacers.forEach((racer, index) => {
+    const racerDiv = document.createElement('div');
+    racerDiv.className = `racer-on-track ${colorMap[racer.nome]}`;
+    racerDiv.textContent = emojiMap[racer.nome] || '👤';
+
+    // Calcular duração da animação baseada na velocidade
+    // Velocidade 100 = 4s, Velocidade 67 = ~6s
+    const baseTime = 10; // tempo base em segundos
+    const animationDuration = baseTime - (racer.velocidade / 100) * 6;
+
+    // Aplicar animação com duração proporcional à velocidade
+    racerDiv.style.animationDuration = `${animationDuration}s`;
+    racerDiv.style.animationDelay = `${index * 0.2}s`;
+    racerDiv.style.animationTimingFunction = 'linear';
+    racerDiv.style.animationFillMode = 'forwards';
+
+    // Definir animação baseada na velocidade
+    if (racer.velocidade >= 95) {
+      racerDiv.style.animationName = 'raceVeryFast';
+    } else if (racer.velocidade >= 85) {
+      racerDiv.style.animationName = 'raceFast';
+    } else if (racer.velocidade >= 75) {
+      racerDiv.style.animationName = 'raceMedium';
+    } else if (racer.velocidade >= 70) {
+      racerDiv.style.animationName = 'raceSlow';
+    } else {
+      racerDiv.style.animationName = 'raceVerySlow';
+    }
+
+    mainTrackContainer.appendChild(racerDiv);
+  });
+
+  raceAnimationDiv.appendChild(mainTrackContainer);
+
+  // Criar legenda ÚNICA com TODOS os corredores
+  const legend = document.createElement('div');
+  legend.className = 'racers-legend';
+  legend.style.marginTop = '20px';
+
+  const legendTitle = document.createElement('div');
+  legendTitle.style.color = '#ff8888';
+  legendTitle.style.fontWeight = '700';
+  legendTitle.style.marginBottom = '12px';
+  legendTitle.style.textAlign = 'center';
+  legendTitle.textContent = '🏁 Todos os Participantes';
+  legend.appendChild(legendTitle);
+
+  // Ordenar por velocidade para exibir na legenda
+  const sortedRacers = [...allRacers].sort((a, b) => b.velocidade - a.velocidade);
+
+  sortedRacers.forEach((racer, index) => {
+    const legendItem = document.createElement('div');
+    legendItem.className = 'legend-item';
+    legendItem.style.animationDelay = `${index * 0.15}s`;
+
+    const icon = document.createElement('div');
+    icon.className = `legend-icon ${colorMap[racer.nome]}`;
+    icon.textContent = emojiMap[racer.nome] || '👤';
+
+    const name = document.createElement('div');
+    name.className = 'legend-name';
+    name.textContent = `${racer.nome} (${racer.clã})`;
+
+    const speed = document.createElement('div');
+    speed.className = 'legend-speed';
+    speed.textContent = `${racer.velocidade} (${(racer.velocidade * 3.6).toFixed(1)} km/h)`;
+
+    legendItem.appendChild(icon);
+    legendItem.appendChild(name);
+    legendItem.appendChild(speed);
+    legend.appendChild(legendItem);
+  });
+
+  raceAnimationDiv.appendChild(legend);
 }
 
 // Função para exibir pódio

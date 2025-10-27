@@ -321,7 +321,7 @@ body {
 }
 
 .clan-group {
-  margin-bottom: 25px;
+  margin-bottom: 30px;
 }
 
 .clan-title {
@@ -329,19 +329,214 @@ body {
   font-size: 1.1rem;
   margin-bottom: 15px;
   text-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+  text-align: center;
 }
 
-.racer {
+/* Pista Circular */
+.race-track-circular {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  aspect-ratio: 1;
+}
+
+.track-background {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at center,
+    transparent 30%,
+    rgba(50, 20, 60, 0.8) 30%,
+    rgba(50, 20, 60, 0.8) 45%,
+    transparent 45%
+  );
+  border: 3px solid rgba(139, 0, 0, 0.5);
+}
+
+.track-lines {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+}
+
+.track-line {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px dashed rgba(255, 255, 255, 0.2);
+}
+
+.track-line:nth-child(1) {
+  transform: scale(0.95);
+}
+.track-line:nth-child(2) {
+  transform: scale(0.85);
+}
+.track-line:nth-child(3) {
+  transform: scale(0.75);
+}
+.track-line:nth-child(4) {
+  transform: scale(0.65);
+}
+
+/* Linha de Chegada na Pista */
+.finish-line-circular {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 35%;
+  background: repeating-linear-gradient(0deg, #fff 0px, #fff 8px, #000 8px, #000 16px);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.9);
+  z-index: 5;
+  border-radius: 3px;
+}
+
+/* Corredores na Pista */
+.racer-on-track {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 35px;
+  height: 35px;
+  margin: -17.5px 0 0 -17.5px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
-  margin-bottom: 12px;
-  animation: slideIn 0.8s ease-out;
+  justify-content: center;
+  font-size: 1.4rem;
+  z-index: 10;
+  box-shadow: 0 0 25px currentColor, 0 0 40px currentColor;
+  opacity: 0;
+  transition: all 0.1s ease;
 }
 
-@keyframes slideIn {
+/* Animações de corrida com velocidades diferentes */
+@keyframes raceVeryFast {
+  0% {
+    opacity: 1;
+    transform: translate(0, -140px) rotate(0deg);
+  }
+  25% {
+    transform: translate(140px, 0) rotate(90deg);
+  }
+  50% {
+    transform: translate(0, 140px) rotate(180deg);
+  }
+  75% {
+    transform: translate(-140px, 0) rotate(270deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, -140px) rotate(360deg);
+  }
+}
+
+@keyframes raceFast {
+  0% {
+    opacity: 1;
+    transform: translate(0, -140px) rotate(0deg);
+  }
+  25% {
+    transform: translate(140px, 0) rotate(90deg);
+  }
+  50% {
+    transform: translate(0, 140px) rotate(180deg);
+  }
+  75% {
+    transform: translate(-140px, 0) rotate(270deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, -140px) rotate(360deg);
+  }
+}
+
+@keyframes raceMedium {
+  0% {
+    opacity: 1;
+    transform: translate(0, -140px) rotate(0deg);
+  }
+  25% {
+    transform: translate(140px, 0) rotate(90deg);
+  }
+  50% {
+    transform: translate(0, 140px) rotate(180deg);
+  }
+  75% {
+    transform: translate(-140px, 0) rotate(270deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, -140px) rotate(360deg);
+  }
+}
+
+@keyframes raceSlow {
+  0% {
+    opacity: 1;
+    transform: translate(0, -140px) rotate(0deg);
+  }
+  25% {
+    transform: translate(140px, 0) rotate(90deg);
+  }
+  50% {
+    transform: translate(0, 140px) rotate(180deg);
+  }
+  75% {
+    transform: translate(-140px, 0) rotate(270deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, -140px) rotate(360deg);
+  }
+}
+
+@keyframes raceVerySlow {
+  0% {
+    opacity: 1;
+    transform: translate(0, -140px) rotate(0deg);
+  }
+  25% {
+    transform: translate(140px, 0) rotate(90deg);
+  }
+  50% {
+    transform: translate(0, 140px) rotate(180deg);
+  }
+  75% {
+    transform: translate(-140px, 0) rotate(270deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, -140px) rotate(360deg);
+  }
+}
+
+/* Legenda dos Corredores */
+.racers-legend {
+  margin-top: 20px;
+  background: rgba(30, 10, 40, 0.6);
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid rgba(139, 0, 0, 0.4);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  animation: fadeInLegend 0.5s ease-out;
+}
+
+@keyframes fadeInLegend {
   from {
     opacity: 0;
-    transform: translateX(-50px);
+    transform: translateX(-20px);
   }
   to {
     opacity: 1;
@@ -349,80 +544,53 @@ body {
   }
 }
 
-.racer-info {
-  min-width: 180px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  margin-right: 10px;
-  color: #fff;
-}
-
-.race-track {
-  flex: 1;
-  height: 30px;
-  background: rgba(50, 20, 60, 0.5);
-  border-radius: 15px;
-  position: relative;
-  overflow: hidden;
-  border: 1px solid rgba(139, 0, 0, 0.3);
-}
-
-.race-progress {
-  height: 100%;
-  border-radius: 15px;
+.legend-icon {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  padding-right: 8px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  animation: raceProgress 4s ease-out;
-  box-shadow: 0 0 15px currentColor;
+  justify-content: center;
+  font-size: 1rem;
+  box-shadow: 0 0 10px currentColor;
 }
 
-@keyframes raceProgress {
-  from {
-    width: 0 !important;
-  }
+.legend-name {
+  flex: 1;
+  color: #fff;
+  font-weight: 600;
 }
 
-/* Linha de Chegada */
-.finish-line {
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background: repeating-linear-gradient(0deg, #fff 0px, #fff 5px, #000 5px, #000 10px);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-  z-index: 10;
-}
-
-.speed-label {
-  color: #000;
-  text-shadow: 0 0 3px #fff;
+.legend-speed {
+  color: #aaa;
+  font-size: 0.85rem;
 }
 
 /* Cores dos Participantes */
 .velha-turbo {
-  background: linear-gradient(90deg, #8b0000, #ff0000);
+  background: linear-gradient(135deg, #8b0000, #ff0000);
   color: #ff0000;
+  border: 2px solid #ff0000;
 }
 .ken-lobisomem {
-  background: linear-gradient(90deg, #4a0080, #9d4edd);
+  background: linear-gradient(135deg, #4a0080, #9d4edd);
   color: #9d4edd;
+  border: 2px solid #9d4edd;
 }
 .spectra {
-  background: linear-gradient(90deg, #003d5c, #00b4d8);
+  background: linear-gradient(135deg, #003d5c, #00b4d8);
   color: #00b4d8;
+  border: 2px solid #00b4d8;
 }
 .zumbizilla {
-  background: linear-gradient(90deg, #1b4332, #52b788);
+  background: linear-gradient(135deg, #1b4332, #52b788);
   color: #52b788;
+  border: 2px solid #52b788;
 }
 .morana {
-  background: linear-gradient(90deg, #660066, #cc00cc);
+  background: linear-gradient(135deg, #660066, #cc00cc);
   color: #cc00cc;
+  border: 2px solid #cc00cc;
 }
 
 /* Saída Final - Pódio */
@@ -596,17 +764,8 @@ body {
     right: 15px;
   }
 
-  .racer {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .racer-info {
-    margin-bottom: 8px;
-  }
-
-  .race-track {
-    width: 100%;
+  .race-track-circular {
+    max-width: 300px;
   }
 }
 
@@ -632,5 +791,9 @@ body {
   .btn {
     padding: 12px 20px;
     font-size: 0.9rem;
+  }
+
+  .race-track-circular {
+    max-width: 250px;
   }
 }
