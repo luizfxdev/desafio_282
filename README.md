@@ -1,4 +1,4 @@
-# 🧙‍♀️ Velocidade das Sombras: O Grande Torneio da Velha Turbo
+# 👹 Velocidade das Sombras: O Grande Torneio da Velha Turbo
 
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
@@ -186,92 +186,13 @@ function rankearCandidatos(candidatos) {
 
 ## 🎨 Recursos da Interface
 
-- 🏁 **Pista de Corrida Circular:** Todos os participantes competem em uma pista única em formato circular
-- ⚡ **Animação Proporcional:** Cada criatura se move com velocidade proporcional aos seus stats (100 = mais rápido)
-- 🎯 **Linha de Chegada:** Bandeira xadrez animada marcando o início/fim da volta
+- ⚡ **Animação de Corrida Visual:** Barras de progresso coloridas representando cada participante
+- 🏁 **Linha de Chegada:** Bandeira xadrez animada no final de cada pista
 - 🏆 **Pódio Dinâmico:** Classificação geral com medalhas e informações detalhadas
 - 🎵 **Controles de Áudio:** Play/pause da música tema
 - 📱 **Design Responsivo:** Adaptável para desktop, tablet e mobile
 - 🎭 **Efeitos Glitch:** Animações temáticas que remetem ao anime DanDaDan
-- 🌈 **Cores Personalizadas:** Cada criatura tem sua paleta única com efeito glow
-
-### 🎪 Como Funciona a Pista Circular
-
-A pista de corrida foi criada usando técnicas avançadas de CSS3 e JavaScript:
-
-#### **Estrutura Visual (CSS)**
-```css
-/* Pista circular com gradiente radial */
-.track-background {
-    border-radius: 50%;
-    background: radial-gradient(
-        circle at center, 
-        transparent 30%,           /* Centro vazio */
-        rgba(50, 20, 60, 0.8) 30%, /* Início da pista */
-        rgba(50, 20, 60, 0.8) 45%, /* Fim da pista */
-        transparent 45%             /* Exterior transparente */
-    );
-}
-
-/* Linhas de guia concêntricas */
-.track-line {
-    border-radius: 50%;
-    border: 2px dashed rgba(255, 255, 255, 0.2);
-    transform: scale(0.95); /* Múltiplas escalas para profundidade */
-}
-
-/* Linha de chegada estilo xadrez */
-.finish-line-circular {
-    background: repeating-linear-gradient(
-        0deg,
-        #fff 0px, #fff 8px,
-        #000 8px, #000 16px
-    );
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.9);
-}
-```
-
-#### **Movimento Orbital (Animação)**
-Cada corredor se move em uma órbita circular usando `transform: translate()` combinado com `rotate()`:
-
-```css
-@keyframes raceVeryFast {
-    0%   { transform: translate(0, -140px) rotate(0deg); }
-    25%  { transform: translate(140px, 0) rotate(90deg); }
-    50%  { transform: translate(0, 140px) rotate(180deg); }
-    75%  { transform: translate(-140px, 0) rotate(270deg); }
-    100% { transform: translate(0, -140px) rotate(360deg); }
-}
-```
-
-**Como funciona:**
-- `translate(x, y)` move o corredor ao longo da pista
-- `rotate()` mantém o emoji sempre "olhando" para frente
-- A duração da animação é **inversamente proporcional** à velocidade
-
-#### **Cálculo de Velocidade (JavaScript)**
-```javascript
-// Velocidade 100 = 4 segundos para completar a volta
-// Velocidade 67 = ~8 segundos para completar a volta
-const baseTime = 10;
-const animationDuration = baseTime - ((racer.velocidade / 100) * 6);
-
-// Aplicar animação linear para movimento constante
-racerDiv.style.animationDuration = `${animationDuration}s`;
-racerDiv.style.animationTimingFunction = 'linear';
-```
-
-#### **Efeitos Visuais**
-- **Glow Effect:** `box-shadow: 0 0 25px currentColor` cria halo luminoso
-- **Cores Únicas:** Cada criatura tem gradiente personalizado
-- **Emojis Animados:** 👵🐺👻🧟🧙 representam visualmente cada participante
-- **Z-index:** Garante que os corredores fiquem sobre a pista
-
-#### **Vantagens da Abordagem**
-1. **Performance:** Usa apenas CSS transforms (GPU-accelerated)
-2. **Escalável:** Fácil adicionar mais corredores
-3. **Responsivo:** A pista se adapta a diferentes tamanhos de tela
-4. **Visual:** Fica claro qual criatura é mais rápida em tempo real
+- 🌈 **Cores Personalizadas:** Cada criatura tem sua paleta única
 
 ## 🛠️ Tecnologias Utilizadas
 
@@ -336,7 +257,6 @@ Este projeto foi inspirado no anime **DanDaDan**, conhecido por sua estética vi
 
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
-
 ---
 
 ## 👨‍💻 Autor
@@ -351,6 +271,5 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 ⭐ Se este projeto foi útil para você, considere dar uma estrela no repositório!
 
-🔗 **Repositório:** https://github.com/luizfxdev/desafio_282
 
 ***Supere os seus medos, eles são a pior corrente que te impede de vencer!***
