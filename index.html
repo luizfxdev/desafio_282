@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Velocidade das Sombras: O Grande Torneio da Velha Turbo</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Vídeo de fundo -->
+    <video class="background-video" autoplay muted loop playsinline>
+      <source src="assets/background.mp4" type="video/mp4" />
+    </video>
+
+    <!-- Áudio de fundo -->
+    <audio id="theme-audio" loop>
+      <source src="assets/theme.mp3" type="audio/mpeg" />
+    </audio>
+
+    <!-- Controles de Áudio -->
+    <div class="audio-controls">
+      <button id="play-audio" class="audio-btn" title="Tocar música">🎵</button>
+      <button id="pause-audio" class="audio-btn" title="Pausar música">⏸️</button>
+    </div>
+
+    <!-- Container Principal -->
+    <div class="container">
+      <h1 class="title glitch-title">🧙‍♀️ Velocidade das Sombras</h1>
+      <h2 class="subtitle">O Grande Torneio da Velha Turbo</h2>
+
+      <div class="description">
+        <p>
+          Na noite do eclipse, criaturas tenebrosas competem pelo título de mais veloz. A temível
+          <span class="highlight">Velha Turbo</span> atinge incríveis <strong>360 km/h</strong>!
+        </p>
+      </div>
+
+      <!-- Dados dos Participantes -->
+      <div class="participants-info">
+        <h3>⚡ Participantes do Torneio:</h3>
+        <div class="participant-list">
+          <div class="participant-item">👵 Velha Turbo (Bruxas) - 100</div>
+          <div class="participant-item">🐺 Ken Lobisomem (Monstros) - 93</div>
+          <div class="participant-item">👻 Spectra (Espectros) - 67</div>
+          <div class="participant-item">🧟 Zumbizilla (Monstros) - 72</div>
+          <div class="participant-item">🧙 Morana (Bruxas) - 88</div>
+        </div>
+      </div>
+
+      <!-- Botões de Ação -->
+      <div class="button-container">
+        <button id="start-race" class="btn glitch">
+          <span>🏁 INICIAR CORRIDA</span>
+        </button>
+        <button id="reset-race" class="btn glitch">
+          <span>🔄 RETORNAR</span>
+        </button>
+      </div>
+
+      <!-- Seção de Resultado -->
+      <div id="result-section" class="result-section hidden">
+        <h3>📊 Resultado do Torneio</h3>
+
+        <!-- Cálculo Detalhado -->
+        <div id="calculation" class="calculation"></div>
+
+        <!-- Animação da Corrida -->
+        <div id="race-animation" class="race-animation"></div>
+
+        <!-- Saída Final -->
+        <div id="final-output" class="final-output"></div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
